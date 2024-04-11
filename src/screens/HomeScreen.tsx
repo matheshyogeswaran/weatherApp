@@ -1,14 +1,21 @@
 import { View, Text, Image, SafeAreaView, TextInput, TouchableOpacity, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { theme } from '../../theme'
 import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import { CalendarDaysIcon, MapPinIcon } from "react-native-heroicons/solid";
+import {debounce} from 'lodash';
+
 export default function HomeScreen() {
   const [showSearch, toggleSearch] = useState(false);
   const [location, setLocation] = useState([1, 2, 3]);
+  
   const handleLocation = (loc) => {
     console.log("location", loc);
   }
+  const handleSearch = value=>{
+    console.log("search", value);
+  }
+  const handleTextDebounce = useCallback(debounce(handleSearch,1200),[]);
   return (
     <View className='flex-1 relative'>
       <Image blurRadius={75} source={require('../../assets/images/bg.png')} className='absolute h-full w-full' />
@@ -17,6 +24,7 @@ export default function HomeScreen() {
           <View className='flex-row flex-end items-center rounded-full justify-end' style={{ backgroundColor: showSearch ? theme.bgWhite(0.2) : "transparent" }}>
             {showSearch ?
               <TextInput
+                onChangeText={handleTextDebounce}
                 placeholder='Search City'
                 placeholderTextColor={"lightgray"}
                 className='pl-6 h-10 pb-1 flex-1 text-white' /> :
@@ -119,47 +127,47 @@ export default function HomeScreen() {
             <View className='flex justify-center items-center w-24 rounded-3xl py-3 space-y-1 mr-4'
               style={{ backgroundColor: theme.bgWhite(0.1) }}
             >
-                <Image source={require('../../assets/images/heavyrain.png')} className='h-11 w-11'/>
-                <Text className='text-white'>Monday</Text>
-                <Text className='text-white text-xl font-semibold'>
-                  23&#176;
-                </Text>
+              <Image source={require('../../assets/images/heavyrain.png')} className='h-11 w-11' />
+              <Text className='text-white'>Monday</Text>
+              <Text className='text-white text-xl font-semibold'>
+                23&#176;
+              </Text>
             </View>
             <View className='flex justify-center items-center w-24 rounded-3xl py-3 space-y-1 mr-4'
               style={{ backgroundColor: theme.bgWhite(0.1) }}
             >
-                <Image source={require('../../assets/images/heavyrain.png')} className='h-11 w-11'/>
-                <Text className='text-white'>Tuesday</Text>
-                <Text className='text-white text-xl font-semibold'>
-                  23&#176;
-                </Text>
+              <Image source={require('../../assets/images/heavyrain.png')} className='h-11 w-11' />
+              <Text className='text-white'>Tuesday</Text>
+              <Text className='text-white text-xl font-semibold'>
+                23&#176;
+              </Text>
             </View>
             <View className='flex justify-center items-center w-24 rounded-3xl py-3 space-y-1 mr-4'
               style={{ backgroundColor: theme.bgWhite(0.1) }}
             >
-                <Image source={require('../../assets/images/heavyrain.png')} className='h-11 w-11'/>
-                <Text className='text-white'>Wednesday</Text>
-                <Text className='text-white text-xl font-semibold'>
-                  23&#176;
-                </Text>
+              <Image source={require('../../assets/images/heavyrain.png')} className='h-11 w-11' />
+              <Text className='text-white'>Wednesday</Text>
+              <Text className='text-white text-xl font-semibold'>
+                23&#176;
+              </Text>
             </View>
             <View className='flex justify-center items-center w-24 rounded-3xl py-3 space-y-1 mr-4'
               style={{ backgroundColor: theme.bgWhite(0.1) }}
             >
-                <Image source={require('../../assets/images/heavyrain.png')} className='h-11 w-11'/>
-                <Text className='text-white'>Thursday</Text>
-                <Text className='text-white text-xl font-semibold'>
-                  23&#176;
-                </Text>
+              <Image source={require('../../assets/images/heavyrain.png')} className='h-11 w-11' />
+              <Text className='text-white'>Thursday</Text>
+              <Text className='text-white text-xl font-semibold'>
+                23&#176;
+              </Text>
             </View>
             <View className='flex justify-center items-center w-24 rounded-3xl py-3 space-y-1 mr-4'
               style={{ backgroundColor: theme.bgWhite(0.1) }}
             >
-                <Image source={require('../../assets/images/heavyrain.png')} className='h-11 w-11'/>
-                <Text className='text-white'>Friday</Text>
-                <Text className='text-white text-xl font-semibold'>
-                  23&#176;
-                </Text>
+              <Image source={require('../../assets/images/heavyrain.png')} className='h-11 w-11' />
+              <Text className='text-white'>Friday</Text>
+              <Text className='text-white text-xl font-semibold'>
+                23&#176;
+              </Text>
             </View>
           </ScrollView>
         </View>
