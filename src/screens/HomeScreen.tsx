@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function HomeScreen() {
   return (
-    <View>
+    <View className="bg-red-200">
       <Text>HomeScreen</Text>
     </View>
   )
