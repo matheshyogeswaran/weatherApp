@@ -1,5 +1,5 @@
 import { View, Text, Image, SafeAreaView, TextInput, TouchableOpacity, ScrollView } from 'react-native'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { theme } from '../../theme'
 import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import { CalendarDaysIcon, MapPinIcon } from "react-native-heroicons/solid";
@@ -10,6 +10,23 @@ export default function HomeScreen() {
   const [showSearch, toggleSearch] = useState(false);
   const [locations, setLocation] = useState([]);
   const [weather, setWeather] = useState({});
+
+  useEffect(()=>{
+    fetchMyWeatherData();
+
+  },[]);
+
+  const fetchMyWeatherData = async ()=>{
+    fetchWeatherForecast({
+      cityName: 'Jaffna',
+      days: '7'
+
+    }).then(data=>{
+      setWeather(data);
+   
+    })
+
+  }
 
   const handleLocation = (loc) => {
     console.log("location", loc);
@@ -92,7 +109,7 @@ export default function HomeScreen() {
           {/* weather image */}
           <View className='flex-row justify-center'>
             <Image
-              source={require('../../assets/images/partlycloudy.png')}
+              source={{ uri: `https://${current?.condition.icon}` }}
 
               className='h-52 w-52' />
           </View>
@@ -105,6 +122,7 @@ export default function HomeScreen() {
               {current?.condition.text}
             </Text>
           </View>
+  
 
           {/* other stats */}
           <View className='flex-row justify-between mx-4'>
@@ -157,7 +175,7 @@ export default function HomeScreen() {
                   className='flex justify-center items-center w-24 rounded-3xl py-3 space-y-1 mr-4'
                   style={{ backgroundColor: theme.bgWhite(0.1) }}
                 >
-                  <Image source={require('../../assets/images/heavyrain.png')} className='h-11 w-11' />
+                  <Image  source={{ uri: `https://${item?.day?.condition.icon}` }} className='h-11 w-11' />
                   <Text className='text-white'>{item.date}</Text>
                   <Text className='text-white text-xl font-semibold'>
                     {item?.day?.avgtemp_c}&#176;
