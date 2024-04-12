@@ -192,7 +192,7 @@ export default function HomeScreen() {
                       weather?.forecast?.forecastday?.map((item, index) => {
                         return (<View
                           key={index}
-                          className='flex justify-center items-center w-24 rounded-3xl py-3 space-y-1 mr-4'
+                          className='flex justify-center items-center w-24 rounded-3xl py-3 space-y-1 mr-4 mb-4'
                           style={{ backgroundColor: theme.bgWhite(0.1) }}
                         >
                           <Image source={{ uri: `https://${item?.day?.condition.icon}` }} className='h-11 w-11' />
