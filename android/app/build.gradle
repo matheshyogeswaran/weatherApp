@@ -76,7 +76,7 @@ android {
 
     namespace "com.weatherapp"
     defaultConfig {
-        applicationId "com.weatherapp"
+        applicationId "com.weatherappInfinitix"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
